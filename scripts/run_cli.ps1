@@ -1,4 +1,4 @@
-# CLI 로 영상 1개를 직접 분석 (서버/GUI 없이)
+﻿# CLI 로 영상 1개를 직접 분석 (서버/GUI 없이)
 # 사용법:  powershell -ExecutionPolicy Bypass -File scripts\run_cli.ps1 "C:\path\game.mp4"
 param([Parameter(Mandatory=$true)][string]$Video, [string]$Out = "")
 $ErrorActionPreference = "Stop"

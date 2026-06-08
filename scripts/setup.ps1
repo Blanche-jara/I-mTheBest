@@ -1,4 +1,4 @@
-# 최초 1회 환경 설정: 가상환경 생성 + 의존성 설치
+﻿# 최초 1회 환경 설정: 가상환경 생성 + 의존성 설치
 # 사용법:  powershell -ExecutionPolicy Bypass -File scripts\setup.ps1
 $ErrorActionPreference = "Stop"
 $root = Split-Path -Parent $PSScriptRoot

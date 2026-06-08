@@ -1,4 +1,4 @@
-# 분석 엔진 로컬 서버 실행 (Flutter GUI 가 접속하는 백엔드)
+﻿# 분석 엔진 로컬 서버 실행 (Flutter GUI 가 접속하는 백엔드)
 # 사용법:  powershell -ExecutionPolicy Bypass -File scripts\run_server.ps1
 $ErrorActionPreference = "Stop"
 $root = Split-Path -Parent $PSScriptRoot
