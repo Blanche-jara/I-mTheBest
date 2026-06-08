@@ -1,0 +1,50 @@
+# ===== Python =====
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+*.log
+
+# ===== 분석 산출물 / 임시 =====
+output/
+sample_output/*/
+*.tmp
+*.wav.tmp
+
+# ===== 모델 가중치(대용량) =====
+*.pt
+*.pth
+*.onnx
+
+# ===== Flutter / Dart =====
+app/.dart_tool/
+app/.flutter-plugins
+app/.flutter-plugins-dependencies
+app/build/
+app/.pub-cache/
+app/.pub/
+app/ios/Flutter/Flutter.framework
+app/ios/Flutter/Flutter.podspec
+app/**/GeneratedPluginRegistrant.*
+app/windows/flutter/ephemeral/
+app/linux/flutter/ephemeral/
+app/macos/Flutter/ephemeral/
+
+# ===== IDE / OS =====
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
+
+# ===== 테스트 영상(대용량) — 직접 넣지 말 것 =====
+*.mp4
+*.mkv
+*.mov
+*.avi
+*.webm
+!docs/**/*.gif
