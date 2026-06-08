@@ -29,6 +29,12 @@ class _HomeScreenState extends State<HomeScreen> {
       TextEditingController(text: _fmt(widget.state.params.minGapSec));
   late final TextEditingController _zCtrl =
       TextEditingController(text: _fmt(widget.state.params.peakZ));
+  late final TextEditingController _minClipCtrl =
+      TextEditingController(text: _fmt(widget.state.params.minClipSec));
+  late final TextEditingController _maxClipCtrl =
+      TextEditingController(text: _fmt(widget.state.params.maxClipSec));
+  late final TextEditingController _padCtrl =
+      TextEditingController(text: _fmt(widget.state.params.clipPadSec));
   bool _reencode = true;
 
   bool _starting = false;
@@ -52,6 +58,9 @@ class _HomeScreenState extends State<HomeScreen> {
     _topKCtrl.dispose();
     _gapCtrl.dispose();
     _zCtrl.dispose();
+    _minClipCtrl.dispose();
+    _maxClipCtrl.dispose();
+    _padCtrl.dispose();
     super.dispose();
   }
 
@@ -76,6 +85,9 @@ class _HomeScreenState extends State<HomeScreen> {
       topK: int.tryParse(_topKCtrl.text.trim()) ?? 12,
       minGapSec: double.tryParse(_gapCtrl.text.trim()) ?? 8.0,
       peakZ: double.tryParse(_zCtrl.text.trim()) ?? 1.2,
+      minClipSec: double.tryParse(_minClipCtrl.text.trim()) ?? 12.0,
+      maxClipSec: double.tryParse(_maxClipCtrl.text.trim()) ?? 30.0,
+      clipPadSec: double.tryParse(_padCtrl.text.trim()) ?? 4.0,
       reencodeClips: _reencode,
     );
   }
@@ -151,6 +163,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   topKCtrl: _topKCtrl,
                   gapCtrl: _gapCtrl,
                   zCtrl: _zCtrl,
+                  minClipCtrl: _minClipCtrl,
+                  maxClipCtrl: _maxClipCtrl,
+                  padCtrl: _padCtrl,
                   reencode: _reencode,
                   onReencode: (v) => setState(() => _reencode = v),
                 ),
@@ -414,6 +429,9 @@ class _ParamsSection extends StatelessWidget {
     required this.topKCtrl,
     required this.gapCtrl,
     required this.zCtrl,
+    required this.minClipCtrl,
+    required this.maxClipCtrl,
+    required this.padCtrl,
     required this.reencode,
     required this.onReencode,
   });
@@ -422,6 +440,9 @@ class _ParamsSection extends StatelessWidget {
   final TextEditingController topKCtrl;
   final TextEditingController gapCtrl;
   final TextEditingController zCtrl;
+  final TextEditingController minClipCtrl;
+  final TextEditingController maxClipCtrl;
+  final TextEditingController padCtrl;
   final bool reencode;
   final ValueChanged<bool> onReencode;
 
@@ -469,6 +490,40 @@ class _ParamsSection extends StatelessWidget {
                   helper: 'mean + z·std',
                 ),
               ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          Row(
+            children: [
+              Expanded(
+                child: _NumField(
+                  controller: minClipCtrl,
+                  label: '클립 최소 길이(초)',
+                  helper: 'min_clip_sec',
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: _NumField(
+                  controller: maxClipCtrl,
+                  label: '클립 최대 길이(초)',
+                  helper: 'max_clip_sec',
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          Row(
+            children: [
+              Expanded(
+                child: _NumField(
+                  controller: padCtrl,
+                  label: '피크 앞뒤 여유(초)',
+                  helper: 'clip_pad_sec · 클립이 짧으면 이 값을 올리세요',
+                ),
+              ),
+              const SizedBox(width: 12),
+              const Expanded(child: SizedBox()),
             ],
           ),
           const SizedBox(height: 14),

@@ -217,8 +217,9 @@ I'mTheBest\
 │   ├─ run_server.ps1     # 서버 실행 (HL_PORT=8000)
 │   └─ run_cli.ps1        # CLI 래퍼
 │
-├─ docs\                  # 문서 (이 파일 + requirements.txt 사본)
+├─ docs\                  # 문서 (이 파일 + 튜닝 가이드 + requirements.txt 사본)
 │   ├─ HANDOVER.md
+│   ├─ 05-tuning.md       # 하이라이트 길이·분석 파라미터 튜닝 + 설정 이식 + 알려진 경고
 │   └─ requirements.txt   # 루트 requirements.txt 와 동일(자급자족용)
 │
 ├─ output\                # 실행 산출물(작업별 폴더, 클립/썸네일/result.json)

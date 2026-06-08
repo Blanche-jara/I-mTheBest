@@ -32,9 +32,9 @@ class AnalysisParams:
     # ---- 융합 / 하이라이트 검출 ----
     top_k: int = 12                    # 최대 하이라이트 개수
     min_gap_sec: float = 8.0           # 하이라이트 간 최소 간격(초)
-    min_clip_sec: float = 4.0          # 클립 최소 길이
-    max_clip_sec: float = 20.0         # 클립 최대 길이
-    clip_pad_sec: float = 2.0          # 피크 앞뒤 여유(초)
+    min_clip_sec: float = 12.0         # 클립 최소 길이
+    max_clip_sec: float = 30.0         # 클립 최대 길이
+    clip_pad_sec: float = 4.0          # 피크 앞뒤 여유(초)
     peak_z: float = 1.2                # 임계값 = mean + peak_z * std (적응형)
 
     # 채널 가중치. None 이면 mutual-information 기반 자동(최대엔트로피) 가중.

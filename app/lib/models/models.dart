@@ -334,6 +334,9 @@ class AnalysisParams {
   final int topK;
   final double minGapSec;
   final double peakZ;
+  final double minClipSec;
+  final double maxClipSec;
+  final double clipPadSec;
   final bool reencodeClips;
 
   const AnalysisParams({
@@ -341,6 +344,9 @@ class AnalysisParams {
     this.topK = 12,
     this.minGapSec = 8.0,
     this.peakZ = 1.2,
+    this.minClipSec = 12.0,
+    this.maxClipSec = 30.0,
+    this.clipPadSec = 4.0,
     this.reencodeClips = true,
   });
 
@@ -349,6 +355,9 @@ class AnalysisParams {
         'top_k': topK,
         'min_gap_sec': minGapSec,
         'peak_z': peakZ,
+        'min_clip_sec': minClipSec,
+        'max_clip_sec': maxClipSec,
+        'clip_pad_sec': clipPadSec,
         'reencode_clips': reencodeClips,
       };
 }

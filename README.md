@@ -55,6 +55,7 @@ cd app; flutter run -d windows                                     # 터미널 2
 - [docs/02-architecture.md](docs/02-architecture.md) — 시스템 아키텍처·데이터 흐름·긴 영상 처리 전략
 - [docs/03-explainability.md](docs/03-explainability.md) — 설명가능성 방법론 (왜 이 순간인가)
 - [docs/04-presentation.md](docs/04-presentation.md) — 발표 슬라이드 아웃라인·데모 시나리오·Q&A
+- [docs/05-tuning.md](docs/05-tuning.md) — **튜닝 가이드** (하이라이트 길이·분석 파라미터·설정 이식·알려진 경고)
 - [docs/HANDOVER.md](docs/HANDOVER.md) — **인수인계** (다른 PC에서 0부터 실행)
 
 ## 요구사항
