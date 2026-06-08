@@ -23,6 +23,9 @@ from scipy.signal import find_peaks
 from .config import AnalysisParams, CHANNELS, CHANNEL_LABELS_KO, CHANNEL_GROUP
 from .infotheory import normalized_mutual_information, mutual_information
 
+# numpy 2.0 에서 trapz -> trapezoid 로 이름이 바뀜. 양쪽 모두 지원.
+_trapz = getattr(np, "trapezoid", None) or np.trapz
+
 
 def _percentile_scale(series: dict[str, np.ndarray]) -> dict[str, np.ndarray]:
     """
@@ -127,10 +130,10 @@ def fuse_and_detect(t: np.ndarray, surprise: dict[str, np.ndarray],
             s_idx, e_idx = _expand_segment(fused, pk, thr, params, fps, n)
             seg = slice(s_idx, e_idx + 1)
             seg_t = t[seg]
-            total_bits = float(np.trapezoid(fused[seg], seg_t)) if seg_t.size > 1 else float(fused[pk])
+            total_bits = float(_trapz(fused[seg], seg_t)) if seg_t.size > 1 else float(fused[pk])
             contribs = {}
             for k in CHANNELS:
-                contribs[k] = (float(np.trapezoid(weighted[k][seg], seg_t))
+                contribs[k] = (float(_trapz(weighted[k][seg], seg_t))
                                if seg_t.size > 1 else float(weighted[k][pk]))
             cand.append({
                 "peak_idx": int(pk),
