@@ -1,0 +1,36 @@
+# =============================================================
+#  게임 영상 자동 하이라이트 추출 엔진 — Python 의존성
+#  Python 3.10 ~ 3.13 에서 동작 확인 (개발 환경: 3.13.13)
+# =============================================================
+
+# --- 수치 / 신호처리 핵심 ---
+numpy>=1.26,<3
+scipy>=1.11
+
+# --- 영상 채널 (프레임 엔트로피 · 옵티컬 플로우) ---
+opencv-python>=4.9
+
+# --- 오디오 채널 (스펙트럼 변화 · 환호성) ---
+librosa>=0.10.2
+soundfile>=0.12
+
+# --- 로컬 API 서버 (Flutter GUI 와 통신) ---
+fastapi>=0.110
+"uvicorn[standard]>=0.29"
+pydantic>=2.6
+python-multipart>=0.0.9
+websockets>=12
+
+# =============================================================
+#  PyTorch (선택) — 학습형 환호성/이벤트 분류기 가속용.
+#  설치하지 않아도 휴리스틱 폴백으로 엔진 전체가 동작합니다.
+#
+#  CPU 전용:
+#     pip install torch --index-url https://download.pytorch.org/whl/cpu
+#
+#  NVIDIA GPU (RTX 50 시리즈 / Blackwell, CUDA 12.8):
+#     pip install torch --index-url https://download.pytorch.org/whl/cu128
+#
+#  자세한 내용은 docs/HANDOVER.md 참고.
+# =============================================================
+# torch>=2.5
