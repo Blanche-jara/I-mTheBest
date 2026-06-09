@@ -52,10 +52,10 @@ cd app; flutter run -d windows                                     # 터미널 2
 
 ```bash
 # 1) 최초 1회 — 백엔드 환경 (가상환경 + 의존성)
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-#   (선택) GPU 없이 CPU 토치: pip install torch --index-url https://download.pytorch.org/whl/cpu
+python3 -m venv .venv                                  # venv 생성(pip 내장 — 시스템 pip 불필요)
+.venv/bin/python -m pip install -r requirements.txt    # 의존성 설치(activate 안 해도 됨)
+source .venv/bin/activate                              # 이후 2-A/2-B 명령용 활성화
+#   (선택) GPU 없이 CPU 토치: python -m pip install torch --index-url https://download.pytorch.org/whl/cpu
 
 # 2-A) CLI 로 영상 1개 바로 분석 (서버/GUI 불필요)
 python -m engine.cli "~/게임영상.mp4" -o output/game1 --fps 3 --top-k 10
