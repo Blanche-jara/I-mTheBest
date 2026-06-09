@@ -28,6 +28,8 @@ Shannon의 **자기정보 `I(x) = -log₂ p(x)`(surprise)** 로 "이 순간이 �
 | `docs/` | 발표/제출용 문서 + 인수인계 | — |
 
 ## 빠른 시작
+
+### Windows
 ```powershell
 # 1) 최초 1회 환경 설정 (가상환경 + 의존성)
 powershell -ExecutionPolicy Bypass -File scripts\setup.ps1
@@ -43,6 +45,30 @@ cd app; flutter run -d windows                                     # 터미널 2
 > ⚠️ Flutter 데스크톱 **빌드**는 경로에 아포스트로피(`'`)가 있으면 실패한다. 이 폴더명 `I'mTheBest` 때문에
 > `flutter run -d windows` 가 막히므로, **폴더명을 바꾸거나**(`ImTheBest`) **`app/` 만 특수문자 없는 경로로 복사**해 실행할 것.
 > (엔진·서버·CLI·`flutter analyze` 는 영향 없음.) 자세한 건 [docs/HANDOVER.md](docs/HANDOVER.md) 참고.
+
+### macOS
+> 사전 준비: `brew install ffmpeg` · Python 3.10+ · (GUI 빌드 시) Flutter + **Xcode + CocoaPods**.
+> macOS 타깃(`app/macos`)·entitlements 는 이미 설정돼 있어 별도 작업 없이 바로 빌드된다.
+
+```bash
+# 1) 최초 1회 — 백엔드 환경 (가상환경 + 의존성)
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+#   (선택) GPU 없이 CPU 토치: pip install torch --index-url https://download.pytorch.org/whl/cpu
+
+# 2-A) CLI 로 영상 1개 바로 분석 (서버/GUI 불필요)
+python -m engine.cli "~/게임영상.mp4" -o output/game1 --fps 3 --top-k 10
+#   → output/game1/result.json + clips/*.mp4 + thumbs/*.jpg
+
+# 2-B) 서버 + GUI
+python -m server.app                 # 터미널 1 — 127.0.0.1:8000
+cd app && flutter run -d macos       # 터미널 2 (또는: open build/macos/Build/Products/Debug/highlight_studio.app)
+```
+> 💡 첫 `flutter build/run -d macos` 는 `media_kit` 영상 백엔드(libmpv `Mpv.xcframework`, ~16MB)를
+> GitHub 릴리스에서 자동 다운로드한다. `ld: framework 'Mpv' not found` 로 실패하면 네트워크 문제이니
+> `app/macos` 에서 `flutter clean` 후 재빌드(다운로드 재시도)하면 된다.
+> GUI 의 로컬 클립 재생·서버 호출을 위해 `app/macos/Runner/*.entitlements` 의 app-sandbox 는 꺼 둔 상태다.
 
 ## 검증 상태
 - ✅ 단위테스트: `tests/test_infotheory.py`, `tests/test_fusion.py` 통과 (self-information=1bit, 스파이크 검출, MI 행렬)

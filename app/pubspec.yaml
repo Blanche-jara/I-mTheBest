@@ -39,7 +39,8 @@ dependencies:
   intl: ^0.20.2
   media_kit: ^1.2.6
   media_kit_video: ^2.0.1
-  media_kit_libs_windows_video: ^1.0.11
+  media_kit_libs_windows_video: ^1.0.11   # Windows 영상 백엔드(libmpv)
+  media_kit_libs_macos_video: ^1.1.4      # macOS 영상 백엔드(libmpv) — Mac 실행용
   file_selector: ^1.1.0
 
 dev_dependencies:
