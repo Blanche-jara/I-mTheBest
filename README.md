@@ -82,6 +82,7 @@ cd app && flutter run -d macos       # 터미널 2 (또는: open build/macos/Bui
 - [docs/03-explainability.md](docs/03-explainability.md) — 설명가능성 방법론 (왜 이 순간인가)
 - [docs/04-presentation.md](docs/04-presentation.md) — 발표 슬라이드 아웃라인·데모 시나리오·Q&A
 - [docs/05-tuning.md](docs/05-tuning.md) — **튜닝 가이드** (하이라이트 길이·분석 파라미터·설정 이식·알려진 경고)
+- [docs/06-analysis.md](docs/06-analysis.md) — **종합 분석 리포트** (정보이론 코어 검증·문서↔코드 정합성·리스크 감사)
 - [docs/HANDOVER.md](docs/HANDOVER.md) — **인수인계** (다른 PC에서 0부터 실행)
 
 ## 요구사항
