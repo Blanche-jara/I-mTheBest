@@ -88,7 +88,7 @@ docs/   (이론·아키텍처·설명가능성·발표·튜닝·인수인계)
 
 ### 3.3 앱 — Flutter GUI
 **강점**: 계층 분리(api/models/state/screens/widgets), **모든 HTTP에 타임아웃 + `detail` 표면화**, 부분/불량 페이로드에 강한 coercion 가드, 좋은 UX 디테일(파일 존재 확인 후 `Image.file`, tabular figures).
-**약점**: ① **아포스트로피 경로 빌드 차단**(원폴더 `I'mTheBest` — 현재 `I-mTheBest`로 회피됨). ② 거대 단일 `ChangeNotifier` + 수동 listener 배선. ③ `clipUrl`/`thumbnailUrl` 파싱하지만 미사용 → 원격 재생 불가. ④ 파라미터 기본값이 engine config·Dart model·폼 폴백 **3곳에 중복**, 폼 검증 없음.
+**약점**: ① 거대 단일 `ChangeNotifier` + 수동 listener 배선. ② `clipUrl`/`thumbnailUrl` 파싱하지만 미사용 → 원격 재생 불가. ③ 파라미터 기본값이 engine config·Dart model·폼 폴백 **3곳에 중복**, 폼 검증 없음.
 
 ### 3.4 문서
 **강점**: **코드 대비 충실도 매우 높음**(20여 개 함수/필드/기본값 spot-check 일치), 공식·단위·워크드 예제 구체적, 한계 섹션 솔직(휴리스틱 cheer, total_bits 차원 등 선제 고백), 청중 분리 명확.
@@ -143,7 +143,7 @@ docs/   (이론·아키텍처·설명가능성·발표·튜닝·인수인계)
 
 - **백엔드(engine+server)는 완전 크로스플랫폼.** `requirements.txt`는 순수(토치는 선택·주석). macOS에서 서버 `/health` 200·엔진 e2e(합성영상→클립+썸네일, ffmpeg 컷 포함) 실측 성공.
 - **Flutter 앱은 macOS 타깃 추가됨**(이 세션). 변경: `flutter create --platforms=macos`, `media_kit_libs_macos_video` 추가, 샌드박스 해제+`network.client`. macOS 빌드(`✓ Built highlight_studio.app`)·실행·서버연결(`GET /health 200`) 실측 성공. 상세는 인수인계 메모 참조.
-- **Windows 빌드는 폴더명에 아포스트로피(`'`)가 있으면 실패** — 현재 `I-mTheBest`로 회피.
+- **Windows GUI 빌드**는 `app/windows` 타깃으로 그대로 동작(이 세션 변경의 영향 없음).
 
 ## 7. 독립 재실행으로 확인한 검증 상태
 

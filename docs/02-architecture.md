@@ -168,7 +168,7 @@ analysis_fps = 3, src 30fps  →  step = 10  →  108,000 프레임 → 분석 �
 ## 6. 모듈 / 파일 지도
 
 ```
-I'mTheBest/
+I-mTheBest/
 ├─ engine/                      # ── Python 엔진 (서버/GUI 비의존) ──
 │  ├─ __init__.py               # 공개 진입점: analyze, AnalysisParams, 모델 re-export
 │  ├─ config.py                 # AnalysisParams(데이터클래스) + CHANNELS / 라벨 / 그룹

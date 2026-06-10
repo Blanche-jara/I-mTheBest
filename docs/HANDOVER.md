@@ -43,7 +43,7 @@ flutter doctor        # Windows 빌드 toolchain 점검 (선택)
 ## 2. 설치 단계 (Setup)
 
 ### 2-1. 저장소 복사
-프로젝트 폴더 전체(`I'mTheBest`)를 대상 PC로 복사합니다.
+프로젝트 폴더 전체(`I-mTheBest`)를 대상 PC로 복사합니다.
 
 > 주의: 기존 `.venv` 폴더는 **복사하지 마세요**. 가상환경은 PC마다 경로가 박혀 있어
 > 다른 PC에서 재사용하면 깨집니다. `.venv` 는 아래 setup 스크립트가 새로 만듭니다.
@@ -123,16 +123,6 @@ flutter run -d windows
 - 주요 의존성: `http`, `fl_chart`, `intl`, `media_kit` / `media_kit_video` / `media_kit_libs_windows_video`(영상 재생), `file_selector`(파일 선택)
 - 앱은 로컬 서버(기본 `http://127.0.0.1:8000`)에 접속해 분석을 요청하고 진행률·결과를 표시합니다. 앱 화면 상단에서 서버 URL을 직접 바꿀 수 있습니다.
 
-> ⚠️ **중요 — 폴더 경로에 특수문자(아포스트로피 ' 등) 금지.**
-> Flutter의 Windows 빌드(CMake/MSBuild)는 경로에 `' # ! $ ^ & * = | , ; < > ?` 문자가 있으면
-> `flutter build windows` / `flutter run -d windows` 가 실패합니다.
-> 이 프로젝트 폴더명 `I'mTheBest` 에는 아포스트로피가 있어 **현재 위치에서는 데스크톱 앱 빌드가 불가**합니다.
-> (단, `flutter analyze` · `flutter pub get` · Python 엔진/서버/CLI 는 영향 없이 정상 동작합니다.)
-> 해결책 — 둘 중 하나:
-> 1. 워크스페이스 폴더명을 아포스트로피 없이 변경 (예: `ImTheBest`). 가장 깔끔하며 모든 게 그대로 동작.
-> 2. `app/` 폴더만 특수문자 없는 경로(예: `C:\dev\highlight_app`)로 복사해 거기서 `flutter run -d windows`.
->    엔진/서버는 원래 위치에서 그대로 돌리고, GUI만 다른 경로에서 띄워 `http://127.0.0.1:8000` 에 접속하면 됩니다.
-
 > 참고 1 (첫 빌드 다운로드): 첫 Windows 빌드 시 `media_kit_libs_windows_video` 가 mpv·ANGLE 네이티브
 > 바이너리(.7z)를 GitHub 릴리스에서 자동 다운로드합니다. "Integrity check failed, please try to re-build"
 > 오류가 나면 일시적 다운로드 문제이니 `build` 폴더를 지우고 다시 실행하거나, 네트워크를 확인하세요.
@@ -185,7 +175,7 @@ CLI 산출물: `<out>\result.json`, `<out>\clips\*.mp4`, `<out>\thumbs\*.jpg`
 ## 4. 폴더 구조
 
 ```
-I'mTheBest\
+I-mTheBest\
 ├─ engine\                # 분석 엔진 (순수 Python, 서버 의존 없음)
 │   ├─ __init__.py        # 진입점: analyze, AnalysisParams 등 export
 │   ├─ config.py          # AnalysisParams 기본값 · 채널 정의(CHANNELS 등)

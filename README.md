@@ -42,9 +42,6 @@ powershell -ExecutionPolicy Bypass -File scripts\run_cli.ps1 "C:\게임영상.mp
 powershell -ExecutionPolicy Bypass -File scripts\run_server.ps1   # 터미널 1
 cd app; flutter run -d windows                                     # 터미널 2
 ```
-> ⚠️ Flutter 데스크톱 **빌드**는 경로에 아포스트로피(`'`)가 있으면 실패한다. 이 폴더명 `I'mTheBest` 때문에
-> `flutter run -d windows` 가 막히므로, **폴더명을 바꾸거나**(`ImTheBest`) **`app/` 만 특수문자 없는 경로로 복사**해 실행할 것.
-> (엔진·서버·CLI·`flutter analyze` 는 영향 없음.) 자세한 건 [docs/HANDOVER.md](docs/HANDOVER.md) 참고.
 
 ### macOS
 > 사전 준비: `brew install ffmpeg` · Python 3.10+ · (GUI 빌드 시) Flutter + **Xcode + CocoaPods**.
