@@ -65,9 +65,16 @@ python -m engine.cli "~/게임영상.mp4" -o output/game1 --fps 3 --top-k 10
 python -m server.app                 # 터미널 1 — 127.0.0.1:8000
 cd app && flutter run -d macos       # 터미널 2 (또는: open build/macos/Build/Products/Debug/highlight_studio.app)
 ```
-> 💡 첫 `flutter build/run -d macos` 는 `media_kit` 영상 백엔드(libmpv `Mpv.xcframework`, ~16MB)를
-> GitHub 릴리스에서 자동 다운로드한다. `ld: framework 'Mpv' not found` 로 실패하면 네트워크 문제이니
-> `app/macos` 에서 `flutter clean` 후 재빌드(다운로드 재시도)하면 된다.
+> 💡 첫 `flutter build/run -d macos` 는 `media_kit` 영상 백엔드(libmpv 프레임워크, ~16MB)를
+> GitHub 릴리스에서 자동 다운로드한다. 이 다운로드가 한 번이라도 실패하면 두 가지 증상이 날 수 있다:
+> - 빌드 중 `ld: framework 'Mpv' not found` → 다운로드 자체 실패(네트워크).
+> - 실행 중 `dyld: Library not loaded: @rpath/Mpv.framework` → 받았지만 앱 번들에 임베드 안 됨
+>   (다운로드 실패 후 `pod install` 이 빈 `vendored_frameworks` 로 굳은 경우).
+>
+> 둘 다 아래 한 줄로 복구된다 — 프레임워크 확보 → 임베드 목록 재생성 → 클린 빌드:
+> ```bash
+> cd app/macos && pod install && cd .. && flutter clean && flutter run -d macos
+> ```
 > GUI 의 로컬 클립 재생·서버 호출을 위해 `app/macos/Runner/*.entitlements` 의 app-sandbox 는 꺼 둔 상태다.
 
 ## 검증 상태
