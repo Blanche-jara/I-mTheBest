@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../models/models.dart';
 import '../theme.dart';
+import 'channel_info.dart';
 
 /// 채널 패널: 가중치 막대 + 5x5 MI 히트맵.
 class ChannelPanel extends StatelessWidget {
@@ -72,14 +73,14 @@ class _WeightBars extends StatelessWidget {
             child: Row(
               children: [
                 SizedBox(
-                  width: 96,
-                  child: Text(
-                    c.labelKo.isNotEmpty ? c.labelKo : channelLabel(c.name),
+                  width: 108,
+                  child: ChannelInfoLabel(
+                    channel: c.name,
+                    text: c.labelKo.isNotEmpty ? c.labelKo : channelLabel(c.name),
                     style: const TextStyle(
                       fontSize: 11,
                       color: AppColors.textSecondary,
                     ),
-                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
                 Expanded(
@@ -156,22 +157,31 @@ class MiMatrixHeatmap extends StatelessWidget {
         final available = constraints.maxWidth - headerW;
         final cell = (available / kChannels.length).clamp(28.0, 56.0);
 
+        Widget header(int i, {required bool center}) => channelTooltip(
+              kChannels[i],
+              MouseRegion(
+                cursor: SystemMouseCursors.click,
+                child: GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onTap: () => showChannelInfoDialog(context, kChannels[i]),
+                  child: Text(
+                    _short[i],
+                    textAlign: center ? TextAlign.center : TextAlign.start,
+                    style: const TextStyle(
+                      fontSize: 9,
+                      color: AppColors.textSecondary,
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+              ),
+            );
+
         Widget colHeader() => Row(
               children: [
                 const SizedBox(width: headerW),
                 for (var i = 0; i < kChannels.length; i++)
-                  SizedBox(
-                    width: cell,
-                    child: Text(
-                      _short[i],
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        fontSize: 9,
-                        color: AppColors.textSecondary,
-                      ),
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
+                  SizedBox(width: cell, child: header(i, center: true)),
               ],
             );
 
@@ -187,14 +197,7 @@ class MiMatrixHeatmap extends StatelessWidget {
                   children: [
                     SizedBox(
                       width: headerW,
-                      child: Text(
-                        _short[r],
-                        style: const TextStyle(
-                          fontSize: 9,
-                          color: AppColors.textSecondary,
-                        ),
-                        overflow: TextOverflow.ellipsis,
-                      ),
+                      child: header(r, center: false),
                     ),
                     for (var c = 0; c < kChannels.length; c++)
                       _MiCell(

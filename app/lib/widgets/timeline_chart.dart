@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../models/models.dart';
 import '../theme.dart';
+import 'channel_info.dart';
 
 /// 타임라인 차트 + 범례 토글.
 /// x = 시간(초). 채널별 surprise 5선 + 굵은 fused 선.
@@ -316,40 +317,57 @@ class _LegendChip extends StatelessWidget {
   Widget build(BuildContext context) {
     final color = AppColors.forChannel(channel);
     final isFused = channel == 'fused';
-    return InkWell(
-      borderRadius: BorderRadius.circular(20),
-      onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-        decoration: BoxDecoration(
-          color: active ? color.withValues(alpha: 0.16) : AppColors.surfaceAlt,
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(
-            color: active ? color : AppColors.border,
-            width: active ? 1.2 : 1,
+    // 호버 → 채널 의미 툴팁, 칩 본문 탭 → 표시 토글(기존), ⓘ 탭 → 도출 팝업.
+    return channelTooltip(
+      channel,
+      InkWell(
+        borderRadius: BorderRadius.circular(20),
+        onTap: onTap,
+        child: Container(
+          padding: const EdgeInsets.fromLTRB(10, 5, 6, 5),
+          decoration: BoxDecoration(
+            color:
+                active ? color.withValues(alpha: 0.16) : AppColors.surfaceAlt,
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(
+              color: active ? color : AppColors.border,
+              width: active ? 1.2 : 1,
+            ),
           ),
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              width: isFused ? 16 : 12,
-              height: isFused ? 4 : 3,
-              decoration: BoxDecoration(
-                color: active ? color : AppColors.textSecondary,
-                borderRadius: BorderRadius.circular(2),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                width: isFused ? 16 : 12,
+                height: isFused ? 4 : 3,
+                decoration: BoxDecoration(
+                  color: active ? color : AppColors.textSecondary,
+                  borderRadius: BorderRadius.circular(2),
+                ),
               ),
-            ),
-            const SizedBox(width: 6),
-            Text(
-              channelLabel(channel),
-              style: TextStyle(
-                fontSize: 11,
-                fontWeight: isFused ? FontWeight.w700 : FontWeight.w500,
-                color: active ? AppColors.textPrimary : AppColors.textSecondary,
+              const SizedBox(width: 6),
+              Text(
+                channelLabel(channel),
+                style: TextStyle(
+                  fontSize: 11,
+                  fontWeight: isFused ? FontWeight.w700 : FontWeight.w500,
+                  color:
+                      active ? AppColors.textPrimary : AppColors.textSecondary,
+                ),
               ),
-            ),
-          ],
+              const SizedBox(width: 5),
+              GestureDetector(
+                onTap: () => showChannelInfoDialog(context, channel),
+                behavior: HitTestBehavior.opaque,
+                child: Icon(
+                  Icons.info_outline,
+                  size: 13,
+                  color: (active ? color : AppColors.textSecondary)
+                      .withValues(alpha: 0.9),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

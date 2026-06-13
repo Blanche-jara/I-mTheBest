@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../theme.dart';
+import 'channel_info.dart';
 
 /// 채널별 기여(bits)를 가로 막대로 표시.
 class ContributionBar extends StatelessWidget {
@@ -31,14 +32,14 @@ class ContributionBar extends StatelessWidget {
             child: Row(
               children: [
                 SizedBox(
-                  width: 96,
-                  child: Text(
-                    channelLabel(e.key),
+                  width: 108,
+                  child: ChannelInfoLabel(
+                    channel: e.key,
+                    text: channelLabel(e.key),
                     style: const TextStyle(
                       fontSize: 11,
                       color: AppColors.textSecondary,
                     ),
-                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
                 Expanded(
